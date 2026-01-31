@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecoverPeer - Privacy-First Recovery Support</title>
+    <meta name="description" content="Secure, private, peer-led recovery support platform. No AI, no surveillance.">
+
+    <link rel="stylesheet" href="ak.css">
+</head>
+<body>
+
+    <!-- QUICK HIDE BUTTON -->
+    <button id="quick-hide-btn" aria-label="Quick Hide Page">Quick Hide (ESC)</button>
+
+    <!-- FAKE COVER PAGE -->
+    <div id="cover-page">
+        <h1>Local Weather & News</h1>
+        <article>
+            <h2>Sunny Skies Expected Today</h2>
+            <p>Residents can expect a beautiful sunny day with temperatures reaching 75°F. Perfect for a walk in the park or reading a book at home. Winds will be light and variable.</p>
+            <p>In other news, the local library has announced new hours for the upcoming season. Community gardening projects are seeing record participation this year.</p>
+            <p><em>(This is a privacy cover page. Refresh to return to the application.)</em></p>
+        </article>
+    </div>
+
+    <!-- APP CONTAINER -->
+    <div id="app-container">
+        
+        <!-- HEADER -->
+        <header id="main-header" class="hidden">
+            <div class="container flex flex-between">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    RecoverPeer
+                </div>
+                <nav class="flex">
+                    <button class="btn btn-outline" id="theme-toggle">Theme</button>
+                    <button class="btn btn-outline" onclick="app.logout()">Logout</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- AUTH SCREEN -->
+        <div id="auth-screen">
+            <div class="card auth-box">
+                <h1 class="text-center" style="color: var(--primary);">Welcome Back</h1>
+                <p class="text-center text-muted mb-4">Secure, Anonymous Recovery Support</p>
+                
+                <form id="login-form">
+                    <label class="text-sm">Pseudonym</label>
+                    <input type="text" id="login-username" placeholder="Enter your pseudonym" required>
+                    
+                    <label class="text-sm">Role</label>
+                    <select id="login-role">
+                        <option value="participant">Participant</option>
+                        <option value="sponsor">Sponsor</option>
+                        <option value="facilitator">Facilitator</option>
+                        <option value="admin">Admin (Tech Only)</option>
+                    </select>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enter Secure Space</button>
+                </form>
+                
+                <div class="mt-4 text-center">
+                    <a href="#" class="text-sm" onclick="app.showPage('register')">Create Anonymous ID</a>
+                </div>
+                <div class="mt-4 text-center border-t pt-2" style="border-top: 1px solid var(--border);">
+                    <a href="#" class="text-sm text-muted" onclick="app.showPage('privacy')">Privacy Policy & Ethics</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD LAYOUT (Shared for roles) -->
+        <main id="dashboard-view" class="hidden container mt-4">
+            <div class="dashboard-header">
+                <div>
+                    <h2 id="welcome-msg">Hello, User</h2>
+                    <p class="text-muted text-sm" id="user-role-badge">Role</p>
+                </div>
+                
+                <!-- Dynamic Navigation based on Role -->
+                <div class="nav-tabs" id="role-nav">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div id="content-area">
+                <!-- Content injected via JS -->
+            </div>
+        </main>
+
+        <!-- PAGE: REGISTER -->
+        <div id="page-register" class="container hidden mt-4" style="max-width: 500px;">
+            <div class="card">
+                <h2>Create Anonymous ID</h2>
+                <p class="text-muted text-sm">We do not collect email addresses. Your identity is protected by a pseudonym.</p>
+                <form id="register-form">
+                    <label>Pseudonym</label>
+                    <input type="text" id="reg-username" required minlength="3">
+                    
+                    <label>Recovery Date (Optional)</label>
+                    <input type="date" id="reg-date">
+
+                    <label>Sponsor Invite Code (Optional)</label>
+                    <input type="text" id="reg-invite" placeholder="If you have a code">
+
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                    <button type="button" class="btn btn-outline" onclick="app.showPage('login')">Back to Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- PAGE: PRIVACY -->
+        <div id="page-privacy" class="container hidden mt-4">
+            <div class="card">
+                <h1>Privacy & Ethics Statement</h1>
+                <h3>Core Principles</h3>
+                <ul>
+                    <li><strong>No AI/Surveillance:</strong> We do not use artificial intelligence to monitor, predict, or profile your behavior.</li>
+                    <li><strong>Encryption:</strong> Journals and messages are encrypted at rest and in transit (simulated in this demo).</li>
+                    <li><strong>Voluntary:</strong> You can delete your data at any time.</li>
+                    <li><strong>Non-Judgmental:</strong> Relapse reports trigger support workflows, never penalties or disciplinary action.</li>
+                </ul>
+                <h3>Data Control</h3>
+                <p>You have the right to export your data or request a full deletion. Admins do not have access to personal journal content or specific meeting attendance logs for shaming purposes.</p>
+                <button class="btn btn-outline mt-4" onclick="app.showPage('login')">Return to Login</button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-muted text-sm mt-4 mb-4 hidden" id="main-footer">
+            <div class="container">
+                <p>RecoverPeer System v1.0 &bull; <a href="#" onclick="app.showPage('privacy')">Privacy & Ethics</a> &bull; <a href="#">Accessibility Statement</a></p>
+                <p class="text-xs" style="opacity: 0.7;">This system does not provide medical diagnosis or treatment. Call emergency services for acute crises.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- MODAL: SUPPORT REQUEST -->
+    <div id="support-modal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2 class="text-center" style="color: var(--primary);">I Need Support</h2>
+            <p class="text-center">It takes courage to ask for help. This is a safe, non-judgmental space.</p>
+            
+            <div class="card" style="background: var(--bg-body); border: none;">
+                <p><strong>What are you feeling right now?</strong></p>
+                <div class="flex-col">
+                    <label class="flex" style="align-items: center; gap: 0.5rem;">
+                        <input type="radio" name="support-type" value="urge" style="width: auto;"> I am experiencing an urge
+                    </label>
+                    <label class="flex" style="align-items: center; gap: 0.5rem;">
+                        <input type="radio" name="support-type" value="relapse" style="width: auto;"> I have recently relapsed
+                    </label>
+                    <label class="flex" style="align-items: center; gap: 0.5rem;">
+                        <input type="radio" name="support-type" value="emotional" style="width: auto;"> I am struggling emotionally
+                    </label>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <p class="text-sm mb-2">Would you like to notify your sponsor?</p>
+                <div class="flex">
+                    <button class="btn btn-primary" style="flex:1;" onclick="app.processSupportRequest(true)">Yes, Notify Sponsor</button>
+                    <button class="btn btn-secondary" style="flex:1;" onclick="app.processSupportRequest(false)">No, Just Guide Me</button>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline text-sm" onclick="app.closeModal('support-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="ak.js"></script>
+</body>
+</html>
